@@ -40,13 +40,22 @@ function knightMoves(start, target) {
     })
 
   }
-  traversal.push(curr)
+  traversal.push(curr);
   //Build the array of the moves from the store previous moves in the map
   while (curr.toString() !== start.toString()) {
     traversal.push(JSON.parse(nodeDepth.get(curr.toString())));
     curr = JSON.parse(nodeDepth.get(curr.toString()));
   }
-  traversal.unshift(target)
-  console.log(traversal.toReversed())
+  traversal.reverse();
+  traversal.push(target);
+  return traversal;
 }
-knightMoves([3, 3],[0,0]);
+
+function driver(start,target) {
+  const arr = knightMoves(start, target);
+  console.log(`You made it in ${arr.length} moves! Here's your path:`);
+  arr.forEach((element) => {
+    console.log(element);
+  })
+}
+driver([0,0],[7,6]);
